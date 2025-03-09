@@ -7,7 +7,12 @@ load_dotenv()
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-SECRET_KEY = 'django-insecure-ic&xty!pu4glv*(g#h#ay0o!6zu40!+n2%s^__^&rkt&p)&i*8'
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/4.2/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-wsz$k587o2%w*-re5$d@@gs+=@73e2yopmcrh9mk-z*&ag#z&4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -54,7 +59,11 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'CMS.wsgi.application'
+WSGI_APPLICATION = 'cms.wsgi.application'
+
+
+# Database
+# https://docs.djangoproject.com/en/4.2/ref/settings/#databases
 
 DATABASES = {
     'default': {
