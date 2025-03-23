@@ -19,4 +19,4 @@ CMS Portfolio to lekki i łatwy w użyciu system zarządzania treścią (CMS), k
 - Piotr Czupyk
 - Marcin Cupryś
 - Wojtek Sitarek
-- Mateusz Judziński
+- Mateusz Judzińsk
