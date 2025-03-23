@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{ profile.first_name }} {{ profile.last_name }} - {{ profile.title }}</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Raleway:wght@300;400;500;600;700&display=swap">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  <style>
+    body {
+        font-family: 'Raleway', sans-serif;
+        background: linear-gradient(135deg, #ffffff, {{ profile.body_color }});
+        color: #333;
+        margin: 0;
+        padding: 0;
+    }
+    .container {
+        max-width: 900px;
+        margin: auto;
+        padding: 3rem 2rem;
+        text-align: center;
+    }
+    .card {
+        border: none;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+    .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+    .profile-img img {
+        border-radius: 50%;
+        max-width: 120px;
+        margin-top: -60px;
+        border: 5px solid white;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .social-links a {
+        margin: 0 15px;
+        font-size: 1.8rem;
+        color: #555;
+        transition: color 0.3s ease;
+    }
+    .social-links a:hover {
+        color: #007bff;
+    }
+    footer {
+        width: 100%;
+        padding: 2rem;
+        background: {{ profile.footer_color }};
+        color: white;
+        text-align: center;
+        position: relative;
+        bottom: 0;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="card p-4 text-center">
+        <div class="profile-img">
+          <img src="{{ profile.user_photo.url }}" alt="Profile Photo">
+        </div>
+        <h1 class="mt-3">{{ profile.first_name }} {{ profile.last_name }}</h1>
+        <h4 class="text-muted">{{ profile.title }}</h4>
+      </div>
+    </header>
+
+    <div class="card p-4 mt-4">
+      <h4>Contact</h4>
+      <p><strong>Telefon:</strong> {{ profile.phone }}</p>
+      <p><strong>Email:</strong> {{ profile.email }}</p>
+      <p><strong>Lokalizacja:</strong> {{ profile.country }}</p>
+    </div>
+
+    <div class="card p-4 mt-4">
+      <h4>About me</h4>
+      <p class="mt-3">{{ profile.person_text }}</p>
+    </div>
+
+    <div class="card p-4 mt-4">
+      <h4>Follow</h4>
+      <div class="social-links">
+        {% if profile.linkedin_url %}
+        <a href="{{ profile.linkedin_url }}" target="_blank"><i class="fab fa-linkedin"></i></a>
+        {% endif %}
+        {% if profile.github_url %}
+        <a href="{{ profile.github_url }}" target="_blank"><i class="fab fa-github"></i></a>
+        {% endif %}
+        {% if profile.mypage_url %}
+        <a href="{{ profile.mypage_url }}" target="_blank"><i class="fas fa-globe"></i></a>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+  <footer>
+    &copy; 2024 {{ profile.first_name }} {{ profile.last_name }} | {{ profile.title }}
+  </footer>
+</body>
+</html>
