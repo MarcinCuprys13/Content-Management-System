@@ -12,6 +12,22 @@ def home(request):
     print(user_card)
     return render(request, 'home.html', {'user_profiles': user_portfolios + user_card})
 
+@login_required(login_url='/accounts/login/')
+def choose_cms_template(request):
+    return render(request, 'choose_template.html')
+
+@login_required(login_url='/accounts/login/')
+def newsletter_creator(request):
+    return render(request, 'choose_template.html')
+
+@login_required(login_url='/accounts/login/')
+def portfolio_creator(request):
+    return render(request, 'choose_template.html')
+
+@login_required(login_url='/accounts/login/')
+def business_creator(request):
+    return render(request, 'choose_template.html')
+
 # @login_required(login_url='/accounts/login/') 
 # def page_creator(request):
 #     if request.method == 'POST':

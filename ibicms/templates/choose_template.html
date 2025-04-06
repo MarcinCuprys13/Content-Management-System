@@ -34,64 +34,42 @@
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item">
-                        <a class="nav-link active" href="{% url 'portfolio' %}">Portfolio</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'business' %}">Business</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{% url 'newsletter' %}">Newsletter</a>
-                    </li>
-                </ul>
-            </div>
+
         </div>
     </nav>
 
-    <!-- Main Content -->
     <div class="container mt-5">
         {% block content %}
         <div class="row g-4">
-            <!-- Portfolio Template -->
             <div class="col-md-4 d-flex">
                 <div class="card custom-card w-100">
-                    <div class="icon-wrapper">
-                        <i class="bi bi-person-badge"></i>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center">Portfolio Template</h5>
-                        <p class="card-text text-center">Showcase your work with a modern portfolio layout.</p>
-                        <a href="{% url 'portfolio' %}" class="btn btn-dark mt-auto">View Portfolio</a>
+                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Portfolio Template">
+                    <div class="card-body">
+                        <h5 class="card-title">Portfolio Template</h5>
+                        <p class="card-text">Showcase your work with a modern portfolio layout.</p>
+                        <a href="{% url 'portfolio_creator' %}" class="btn btn-primary mt-auto">View Portfolio</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Business Template -->
             <div class="col-md-4 d-flex">
                 <div class="card custom-card w-100">
-                    <div class="icon-wrapper">
-                        <i class="bi bi-briefcase"></i>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center">Business Template</h5>
-                        <p class="card-text text-center">A clean, professional layout for your business website.</p>
-                        <a href="{% url 'business' %}" class="btn btn-dark mt-auto">View Business</a>
+                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Business Template">
+                    <div class="card-body">
+                        <h5 class="card-title">Business Template</h5>
+                        <p class="card-text">A clean, professional layout for your business website.</p>
+                        <a href="{% url 'business_creator' %}" class="btn btn-success mt-auto">View Business</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Newsletter Template -->
             <div class="col-md-4 d-flex">
                 <div class="card custom-card w-100">
-                    <div class="icon-wrapper">
-                        <i class="bi bi-envelope-paper"></i>
-                    </div>
-                    <div class="card-body d-flex flex-column">
-                        <h5 class="card-title text-center">Newsletter Template</h5>
-                        <p class="card-text text-center">Create engaging email newsletters with this design.</p>
-                        <a href="{% url 'newsletter' %}" class="btn btn-dark mt-auto">View Newsletter</a>
+                    <img src="https://via.placeholder.com/300x150" class="card-img-top" alt="Newsletter Template">
+                    <div class="card-body">
+                        <h5 class="card-title">Newsletter Template</h5>
+                        <p class="card-text">Create engaging email newsletters with this design.</p>
+                        <a href="{% url 'newsletter_creator' %}" class="btn btn-info mt-auto">View Newsletter</a>
                     </div>
                 </div>
             </div>
