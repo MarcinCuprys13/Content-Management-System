@@ -16,10 +16,6 @@ def choose_cms_template(request):
     return render(request, 'choose_template.html')
 
 @login_required(login_url='/accounts/login/')
-def newsletter_creator(request):
-    return render(request, 'choose_template.html')
-
-@login_required(login_url='/accounts/login/')
 def portfolio_creator(request):
     if request.method == 'POST':
         title = request.POST.get('title')
@@ -50,6 +46,60 @@ def portfolio_creator(request):
 
     return render(request, 'creators/portfolio_creator.html')
 
+@login_required(login_url='/accounts/login/')
+def business_creator(request):
+    if request.method == 'POST':
+        ProfileCard.objects.create(
+            user=request.user,
+            first_name=request.POST.get('first_name'),
+            last_name=request.POST.get('last_name'),
+            title=request.POST.get('title'),
+            phone=request.POST.get('phone'),
+            email=request.POST.get('email'),
+            country=request.POST.get('country'),
+            person_text=request.POST.get('person_text'),
+            linkedin_url=request.POST.get('linkedin_url'),
+            github_url=request.POST.get('github_url'),
+            mypage_url=request.POST.get('mypage_url'),
+            body_color=request.POST.get('body_color'),
+            footer_color=request.POST.get('footer_color'),
+            user_photo=request.FILES.get('user_photo')
+        )
+        return redirect('home')
+
+    return render(request, 'creators/card_creator.html')
+
+@login_required(login_url='/accounts/login/')
+def newsletter_creator(request):
+    # if request.method == 'POST':
+    #     title = request.POST.get('title')
+    #     hero_title = request.POST.get('hero_title')
+    #     hero_text = request.POST.get('hero_text')
+    #     # first_name = request.POST.get('first_name')
+    #     # last_name = request.POST.get('last_name')
+    #     phone = request.POST.get('phone')
+    #     email = request.POST.get('email')
+    #     project_text = request.POST.get('project_text')
+    #     user_photo = request.FILES.get('user_photo')
+    #     website_photo = request.FILES.get('website_photo')
+
+    #     ProfilePortfolio.objects.create(
+    #         user=request.user,
+    #         title=title,
+    #         hero_title=hero_title,
+    #         hero_text=hero_text,
+    #         # first_name=first_name,
+    #         # last_name=last_name,
+    #         phone=phone,
+    #         email=email,
+    #         project_text=project_text,
+    #         user_photo=user_photo,
+    #         website_photo=website_photo
+    #     )
+    #     return redirect('home')
+
+    # return render(request, 'creators/portfolio_creator.html')
+    pass
 
 def portfolio_preview(request, id):
     profile = get_object_or_404(ProfilePortfolio, pk=id)
@@ -57,9 +107,6 @@ def portfolio_preview(request, id):
         'ProfilePortfolio': profile
     })
 
-@login_required(login_url='/accounts/login/')
-def business_creator(request):
-    return render(request, 'choose_template.html')
 
 # @login_required(login_url='/accounts/login/') 
 # def page_creator(request):
