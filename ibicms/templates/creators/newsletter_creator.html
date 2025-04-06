@@ -1,0 +1,171 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<style>
+    .form-container {
+        max-width: 480px;
+        margin: 50px auto;
+        padding: 25px;
+        border-radius: 16px;
+        box-shadow: 0 4px 15px rgba(0,0,0,0.06);
+        background-color: #fff;
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    .form-container h2 {
+        text-align: center;
+        margin-bottom: 25px;
+        color: #333;
+    }
+
+    .form-group {
+        margin-bottom: 15px;
+    }
+
+    .form-label {
+        font-weight: 500;
+        display: block;
+        margin-bottom: 5px;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="file"],
+    textarea,
+    select {
+        width: 100%;
+        padding: 9px 12px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        font-size: 14px;
+    }
+
+    input[type="color"] {
+        -webkit-appearance: none;
+        border: none;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        padding: 0;
+        cursor: pointer;
+        outline: none;
+        box-shadow: 0 0 0 1px #ccc;
+    }
+
+    input[type="color"]::-webkit-color-swatch-wrapper {
+        padding: 0;
+        border-radius: 50%;
+    }
+
+    input[type="color"]::-webkit-color-swatch {
+        border: none;
+        border-radius: 50%;
+    }
+
+    .form-container button {
+        margin-top: 20px;
+        padding: 12px;
+        background-color: #007bff;
+        color: white;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    .form-container button:hover {
+        background-color: #0056b3;
+    }
+
+    .color-row {
+        display: flex;
+        gap: 20px;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+    }
+
+    .color-column {
+        text-align: center;
+        flex: 1;
+    }
+
+    .color-column label {
+        display: block;
+        margin-bottom: 5px;
+        font-size: 14px;
+    }
+
+    .section-title {
+    text-align: center;
+    font-weight: 600;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.submit-btn {
+    margin-top: 20px;
+    padding: 12px 30px;
+    background-color: #007bff;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.submit-btn:hover {
+    background-color: #0056b3;
+}
+
+
+</style>
+
+<div class="form-container">
+    <h2>Create Newsletter</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label class="form-label section-title">Colours:</label>
+            <div class="color-row">
+                <div class="color-column">
+                    {{ form.head_color }}
+                    <label for="{{ form.head_color.id_for_label }}">Header</label>
+                </div>
+                <div class="color-column">
+                    {{ form.body_color }}
+                    <label for="{{ form.body_color.id_for_label }}">Content</label>
+                </div>
+                <div class="color-column">
+                    {{ form.footer_color }}
+                    <label for="{{ form.footer_color.id_for_label }}">Footer</label>
+                </div>
+            </div>
+        </div>
+
+        {% for field in form %}
+        {% if field.name not in 'head_color body_color footer_color' %}
+        <div class="form-group">
+            {{ field.label_tag }}
+            {{ field }}
+            {% if field.help_text %}
+            <small class="form-text text-muted">{{ field.help_text }}</small>
+            {% endif %}
+            {% for error in field.errors %}
+            <div class="text-danger">{{ error }}</div>
+            {% endfor %}
+        </div>
+        {% endif %}
+        {% endfor %}
+
+        <div style="text-align: center;">
+            <button type="submit" class="submit-btn">Zapisz</button>
+        </div>
+
+
+    </form>
+</div>
+{% endblock %}
