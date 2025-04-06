@@ -128,41 +128,6 @@
     </div>
     {% endif %}
 
-    {% if newsletters %}
-    <h2>Newsletter Pages</h2>
-    <div class="table_div">
-        <table>
-            <thead>
-            <tr>
-                <th>Title</th>
-                <th>Email</th>
-                <th>Head Color</th>
-                <th>Link</th>
-                <th>Actions</th>
-            </tr>
-            </thead>
-            <tbody>
-            {% for item in newsletters %}
-            <tr>
-                <td>{{ item.title }}</td>
-                <td>{{ item.email }}</td>
-                <td>{{ item.head_color }}</td>
-                <td>
-                    <a href="{% url 'newsletter_page' id=item.pk %}" class="view-link">View Page</a>
-                </td>
-                <td>
-                    <form action="{% url 'delete_newsletter' item.pk %}" method="POST" style="display:inline;">
-                        {% csrf_token %}
-                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this newsletter?')">Delete</button>
-                    </form>
-                </td>
-            </tr>
-            {% endfor %}
-            </tbody>
-        </table>
-    </div>
-    {% endif %}
-
     {% if cards %}
     <h2>Business Cards</h2>
     <div class="table_div">
@@ -191,6 +156,41 @@
                     <form action="{% url 'delete_card' item.pk %}" method="POST" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this business card?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    {% endif %}
+
+    {% if newsletters %}
+    <h2>Newsletter Pages</h2>
+    <div class="table_div">
+        <table>
+            <thead>
+            <tr>
+                <th>Title</th>
+                <th>Email</th>
+                <th>Subtitle</th>
+                <th>Link</th>
+                <th>Actions</th>
+            </tr>
+            </thead>
+            <tbody>
+            {% for item in newsletters %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.subtitle }}</td>
+                <td>
+                    <a href="{% url 'newsletter_page' id=item.pk %}" class="view-link">View Page</a>
+                </td>
+                <td>
+                    <form action="{% url 'delete_newsletter' item.pk %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this newsletter?')">Delete</button>
                     </form>
                 </td>
             </tr>
