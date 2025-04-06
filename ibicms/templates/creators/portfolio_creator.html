@@ -24,7 +24,8 @@
 
 <div class="form-container">
   <h2 class="mb-4">Create Your Portfolio</h2>
-  <form method="POST" enctype="multipart/form-data" action="/create/">
+  <form method="POST" enctype="multipart/form-data" action="/portfolio-creator/">
+    {% csrf_token %}
 
     <div class="form-group">
       <label for="title">Page Title</label>
@@ -41,7 +42,7 @@
       <textarea class="form-control" id="hero_text" name="hero_text" rows="3"></textarea>
     </div>
 
-    <div class="form-row">
+    <!-- <div class="form-row">
       <div class="form-group col-md-6">
         <label for="first_name">First Name</label>
         <input type="text" class="form-control" id="first_name" name="first_name">
@@ -50,7 +51,7 @@
         <label for="last_name">Last Name</label>
         <input type="text" class="form-control" id="last_name" name="last_name">
       </div>
-    </div>
+    </div> -->
 
     <div class="form-group">
       <label for="phone">Phone Number</label>
