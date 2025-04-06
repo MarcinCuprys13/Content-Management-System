@@ -1,24 +1,9 @@
-"""
-URL configuration for cms project.
-
-The `urlpatterns` list routes URLs to views. For more information please see:
-    https://docs.djangoproject.com/en/4.2/topics/http/urls/
-Examples:
-Function views
-    1. Add an import:  from my_app import views
-    2. Add a URL to urlpatterns:  path('', views.home, name='home')
-Class-based views
-    1. Add an import:  from other_app.views import Home
-    2. Add a URL to urlpatterns:  path('', Home.as_view(), name='home')
-Including another URLconf
-    1. Import the include() function: from django.urls import include, path
-    2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
-"""
 from django.contrib import admin
 from django.urls import path
 from django.contrib import admin
 from django.urls import path
 from ibicms.views import home
+from ibicms.views import business_creator, choose_cms_template, home, newsletter_creator, portfolio_creator
 from django.urls import path, include
 from ibicms import views
 from ibicms.views import create_newsletter
@@ -30,4 +15,14 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
     path('newsletter/create/', views.create_newsletter, name='create_newsletter'),
+
+    path('home/', home, name='home'),
+
+    path('choose-template/', choose_cms_template, name='choose_cms_template'),
+    path('portfolio-creator/', portfolio_creator, name='portfolio_creator'),
+    path('newsletter-creator/', newsletter_creator, name='newsletter_creator'),
+    path('business-creator/', business_creator, name='business_creator'),
+
+
+
 ]

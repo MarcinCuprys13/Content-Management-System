@@ -4,14 +4,30 @@ from .models import ProfilePortfolio, ProfileCard
 from django.shortcuts import render
 from .forms import ProfileNewsletterForm
 
-@login_required(login_url='/accounts/login/') 
+@login_required(login_url='/accounts/login/')
 def home(request):
-    if request.user.is_authenticated:
-        user_portfolios = ProfilePortfolio.objects.filter(user=request.user)
-        user_card = ProfileCard.objects.filter(user=request.user)
-        return render(request, 'home.html', {'user_pages': user_portfolios + user_card})
-    else:
-        return render(request, 'base.html')
+    user_portfolios = list(ProfilePortfolio.objects.filter(user=request.user))
+    user_card = list(ProfileCard.objects.filter(user=request.user))
+    print("uytwkonik zalogowany")
+    print(user_portfolios)
+    print(user_card)
+    return render(request, 'home.html', {'user_profiles': user_portfolios + user_card})
+
+@login_required(login_url='/accounts/login/')
+def choose_cms_template(request):
+    return render(request, 'choose_template.html')
+
+@login_required(login_url='/accounts/login/')
+def newsletter_creator(request):
+    return render(request, 'choose_template.html')
+
+@login_required(login_url='/accounts/login/')
+def portfolio_creator(request):
+    return render(request, 'choose_template.html')
+
+@login_required(login_url='/accounts/login/')
+def business_creator(request):
+    return render(request, 'choose_template.html')
 
 # @login_required(login_url='/accounts/login/') 
 # def page_creator(request):
