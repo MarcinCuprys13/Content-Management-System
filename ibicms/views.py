@@ -51,8 +51,8 @@ def business_creator(request):
     if request.method == 'POST':
         ProfileCard.objects.create(
             user=request.user,
-#             first_name=request.POST.get('first_name'),
-#             last_name=request.POST.get('last_name'),
+            first_name=request.POST.get('first_name'),
+            last_name=request.POST.get('last_name'),
             title=request.POST.get('title'),
             phone=request.POST.get('phone'),
             email=request.POST.get('email'),

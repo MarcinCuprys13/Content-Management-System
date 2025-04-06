@@ -2,13 +2,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Create Your Card</title>
+  <title>Create Business Card</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
   <style>
-    body {
-      background: #f8f9fa;
-      padding: 2rem;
-    }
+    body { background: #f8f9fa; padding: 2rem; }
     .form-container {
       max-width: 700px;
       margin: auto;
@@ -49,73 +46,74 @@
   <h2 class="mb-4">Create Your Card</h2>
   <form action="/business-creator/" method="POST" enctype="multipart/form-data">
     {% csrf_token %}
-    <div class="form-group mb-3">
-      <label for="first_name">First Name</label>
+
+    <div class="mb-3">
+      <label for="first_name" class="form-label">First Name</label>
       <input type="text" class="form-control" id="first_name" name="first_name" required>
     </div>
 
-    <div class="form-group mb-3">
-      <label for="last_name">Last Name</label>
+    <div class="mb-3">
+      <label for="last_name" class="form-label">Last Name</label>
       <input type="text" class="form-control" id="last_name" name="last_name" required>
     </div>
 
-    <div class="form-group mb-3">
-      <label for="title">Professional Title</label>
-      <input type="text" class="form-control" id="title" name="title" placeholder="e.g. Business Card" required>
+    <div class="mb-3">
+      <label for="title" class="form-label">Professional Title</label>
+      <input type="text" class="form-control" id="title" name="title" required>
     </div>
 
-    <div class="form-group mb-3">
-      <label for="phone">Phone</label>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone</label>
       <input type="text" class="form-control" id="phone" name="phone">
     </div>
 
-    <div class="form-group mb-3">
-      <label for="email">Email</label>
+    <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
       <input type="email" class="form-control" id="email" name="email">
     </div>
 
-    <div class="form-group mb-3">
-      <label for="country">Location</label>
+    <div class="mb-3">
+      <label for="country" class="form-label">Location</label>
       <input type="text" class="form-control" id="country" name="country">
     </div>
 
-    <div class="form-group mb-3">
-      <label for="person_text">About Me</label>
+    <div class="mb-3">
+      <label for="person_text" class="form-label">About Me</label>
       <textarea class="form-control" id="person_text" name="person_text" rows="4"></textarea>
     </div>
 
-    <div class="form-group mb-3">
-      <label for="linkedin_url">LinkedIn URL</label>
+    <div class="mb-3">
+      <label for="linkedin_url" class="form-label">LinkedIn URL</label>
       <input type="url" class="form-control" id="linkedin_url" name="linkedin_url">
     </div>
 
-    <div class="form-group mb-3">
-      <label for="github_url">GitHub URL</label>
+    <div class="mb-3">
+      <label for="github_url" class="form-label">GitHub URL</label>
       <input type="url" class="form-control" id="github_url" name="github_url">
     </div>
 
-    <div class="form-group mb-3">
-      <label for="mypage_url">Personal Website</label>
+    <div class="mb-3">
+      <label for="mypage_url" class="form-label">Personal Website</label>
       <input type="url" class="form-control" id="mypage_url" name="mypage_url">
     </div>
 
-    <div class="form-group mb-4">
+    <div class="mb-4">
       <label class="form-label fw-semibold">Colors</label>
       <div class="color-row">
         <div class="color-col">
           <input type="color" id="body_color" name="body_color" value="#f0f0f0">
-          <label for="body_color">Background</label>
+          <label for="body_color" class="form-label d-block">Background</label>
         </div>
         <div class="color-col">
           <input type="color" id="footer_color" name="footer_color" value="#343a40">
-          <label for="footer_color">Footer</label>
+          <label for="footer_color" class="form-label d-block">Footer</label>
         </div>
       </div>
     </div>
 
-    <div class="form-group mb-3">
-      <label for="user_photo">Profile Photo</label>
-      <input type="file" class="form-control-file" id="user_photo" name="user_photo">
+    <div class="mb-3">
+      <label for="user_photo" class="form-label">Profile Photo</label>
+      <input type="file" class="form-control" id="user_photo" name="user_photo">
     </div>
 
     <button type="submit" class="btn btn-dark w-100">Generate Profile</button>

@@ -84,7 +84,8 @@
     <div class="row align-items-center">
       <div class="col-md-6 text-center">
         {% if ProfilePortfolio.user_photo %}
-          <img src="{{ ProfilePortfolio.user_photo.url }}" alt="Zdjęcie użytkownika" class="img-fluid rounded-circle shadow-lg">
+        <img src="{{ ProfilePortfolio.user_photo.url }}" alt="Zdjęcie użytkownika"
+             class="img-fluid rounded-circle shadow-lg mx-auto d-block" style="max-width: 180px;">
         {% else %}
           <img src="https://via.placeholder.com/300" alt="Zdjęcie osoby" class="img-fluid rounded-circle shadow-lg">
         {% endif %}

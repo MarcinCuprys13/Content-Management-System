@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.conf import settings
+from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
 from django.urls import path
@@ -25,7 +27,7 @@ urlpatterns = [
     path('portfolio/<int:id>/delete/', delete_portfolio, name='delete_portfolio'),
     path('newsletter/<int:id>/delete/', delete_newsletter, name='delete_newsletter'),
     path('card/<int:id>/delete/', delete_card, name='delete_card'),
-
-
     
 ]
+
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
