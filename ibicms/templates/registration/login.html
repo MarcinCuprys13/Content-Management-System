@@ -1,69 +1,74 @@
-
-{% extends "base.html" %}
-
-{% block title %}Login{% endblock %}
-
 {% block content %}
-
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f2f2f2;
-        margin: 0;
-        padding: 0;
+    .login-wrapper {
+        background-color: #f8f9fa;
         display: flex;
         justify-content: center;
         align-items: center;
         height: 100vh;
-    }
-
-    .container {
-        width: 300px;
         padding: 20px;
-        background-color: #fff;
-        border-radius: 5px;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
     }
 
-    h2 {
+    .login-box {
+        background-color: #ffffff;
+        padding: 30px 25px;
+        border-radius: 8px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+    }
+
+    .login-box h2 {
         text-align: center;
-        margin-bottom: 20px;
+        margin-bottom: 25px;
+        font-size: 1.8rem;
+        color: #212529;
     }
 
     form {
+        text-align: center;
         display: flex;
         flex-direction: column;
     }
 
-    input[type="text"],
-    input[type="password"] {
-        padding: 10px;
-        margin-bottom: 15px;
-        border: 1px solid #ccc;
+    .login-box input[type="text"],
+    .login-box input[type="password"] {
+        padding: 12px;
+        margin-bottom: 16px;
+        border: 1px solid #ced4da;
         border-radius: 5px;
+        font-size: 1rem;
+        transition: border-color 0.2s ease;
     }
 
-    button {
-        padding: 10px 15px;
-        background-color: #007bff;
-        color: #fff;
+    .login-box input:focus {
+        border-color: #212529;
+        outline: none;
+    }
+
+    .btn-login {
+        background-color: #212529;
+        color: #ffffff;
+        padding: 12px;
+        font-weight: bold;
         border: none;
         border-radius: 5px;
-        cursor: pointer;
         transition: background-color 0.3s ease;
     }
 
-        button:hover {
-            background-color: #0056b3;
-        }
-
+    .btn-login:hover {
+        background-color: #000000;
+    }
 </style>
-<h2>Log In</h2>
-<div class="container">
-    <form method="post">
-        {% csrf_token %}
-        {{ form }}
-        <button type="submit">Log In</button>
-    </form>
+
+<div class="login-wrapper">
+    <div class="login-box">
+        <h2>Log In</h2>
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit" class="btn-login">Log In</button>
+        </form>
+    </div>
 </div>
 {% endblock %}
