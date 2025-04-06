@@ -3,96 +3,96 @@
 {% block content %}
 
 <style>
-    .logout-link, .login-link, .edit-link {
-        text-decoration: none;
-        color: #007bff;
-        font-weight: bold;
-        border: 2px solid #007bff;
-        padding: 8px 16px;
-        border-radius: 5px;
-        margin-left: 2.5%;
-    }
-
-    .logout-link:hover, .login-link:hover, .edit-link:hover {
-        text-decoration: none;
-        background-color: #007bff;
-        color: #fff;
-    }
-
-    .table_edit {
-        text-align: center;
-    }
-
-    p {
-        margin-left: 2.5%;
-    }
-
-    .content-container {
-        height: 100vh;
-        padding: 0;
-        margin: 0 5%;
-        background-color: white;
-    }
-
     body {
         font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
         margin: 0;
         padding: 0;
-        background-color: #687485;
+        background-color: #f8f9fa;
     }
 
-    table {
-        background-color: transparent;
-        width: 95%;
-        border-collapse: collapse;
-        margin: 20px auto;
-        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        border: 2px solid;
-    }
-
-    .table_div {
-        overflow-x: auto;
-    }
-
-    th, td {
-        padding: 15px;
-        text-align: left;
-        border-bottom: 1px solid #ddd;
-    }
-
-    th {
-        color: #333;
+    .content-container {
         text-align: center;
+        min-height: 100vh;
+        padding: 2rem;
+        background-color: #ffffff;
+        color: #212529;
+        width: 100%;
     }
 
-    .Add_new {
-        text-align: center;
-        margin-top: 20px;
-    }
-
-    a.edit-link:hover {
+    .edit-link {
         text-decoration: none;
+        font-weight: bold;
+        padding: 8px 16px;
+        border-radius: 5px;
+        background-color: #212529;
+        color: #ffffff;
+        border: none;
+        display: inline-block;
+        margin: 10px 0;
     }
 
-    th:not(:last-child),
-    td:not(:last-child) {
-        border-right: 1px solid #ddd;
+    .edit-link:hover {
+        background-color: #343a40;
+        color: #ffffff;
     }
 
     h2 {
         text-align: center;
-        font-size: 3vw;
+        font-size: 2.5rem;
+        margin: 2rem 0;
     }
 
-    .logout-div {
-        padding-top: 2%;
+    .table_div {
+        overflow-x: auto;
+        margin-top: 2rem;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        background-color: #ffffff;
+        color: #212529;
+        box-shadow: 0 0 20px rgba(0,0,0,0.05);
+        border: 1px solid #dee2e6;
+    }
+
+    th, td {
+        padding: 1rem;
+        border: 1px solid #dee2e6;
+        text-align: center;
+    }
+
+    th {
+        background-color: #f1f1f1;
+        font-weight: bold;
+    }
+
+    .Add_new {
+        text-align: center;
+        margin: 2rem 0;
+    }
+
+    .view-link {
+        color: #0d6efd;
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+    .view-link:hover {
+        text-decoration: underline;
+    }
+
+    .hello-user {
+        font-size: 1.2rem;
+        font-weight: 500;
+        margin-bottom: 1rem;
+        color: #212529;
     }
 </style>
 
+
 <div class="content-container">
-    <div class="logout-div">
-        <a href="{% url 'logout' %}" class="logout-link">Log Out</a>
-    </div>
+    <p class="hello-user">Hello, {{ user.username }} 👋</p>
 
     {% if user_profiles %}
     <h2>Your Pages</h2>
@@ -116,10 +116,10 @@
                     <td>{{ profile.first_name }} {{ profile.last_name }}</td>
                     <td>{{ profile.email }}</td>
                     <td>{{ profile.phone }}</td>
-                    <td class="table_edit">
+                    <td>
                         <a href="{% url 'profile-edit' pk=profile.pk %}" class="edit-link">Edit</a>
                     </td>
-                    <td class="table_view">
+                    <td>
                         <a href="{% url 'page' id=profile.pk %}" class="view-link">View Page</a>
                     </td>
                 </tr>
@@ -127,11 +127,11 @@
             </tbody>
         </table>
     </div>
-{% endif %}
+    {% endif %}
+
     <div class="Add_new">
         <a href="{% url 'choose_cms_template' %}" class="edit-link">Add Project</a>
     </div>
-
 </div>
 
 {% endblock %}
