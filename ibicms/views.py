@@ -1,6 +1,6 @@
 from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
-from .models import ProfilePortfolio, ProfileCard
+from .models import ProfilePortfolio, ProfileCard, ProfileNewsletter
 from django.shortcuts import render
 
 @login_required(login_url='/accounts/login/')
@@ -106,6 +106,25 @@ def portfolio_preview(request, id):
     return render(request, 'portfolio_template.html', {
         'ProfilePortfolio': profile
     })
+
+def delete_portfolio(request, id):
+    if request.method == "POST":
+        item = get_object_or_404(ProfilePortfolio, id=id, user=request.user)
+        item.delete()
+    return redirect('home')
+
+def delete_newsletter(request, id):
+    if request.method == "POST":
+        item = get_object_or_404(ProfileNewsletter, id=id, user=request.user)
+        item.delete()
+    return redirect('home')
+
+def delete_card(request, id):
+    if request.method == "POST":
+        item = get_object_or_404(ProfileCard, id=id, user=request.user)
+        item.delete()
+    return redirect('home')
+
 
 
 # @login_required(login_url='/accounts/login/') 
