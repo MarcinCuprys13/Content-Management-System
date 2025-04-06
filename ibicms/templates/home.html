@@ -98,24 +98,31 @@
     <div class="table_div">
         <table>
             <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Link</th>
-                </tr>
+            <tr>
+                <th>Title</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Link</th>
+                <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
-                {% for item in portfolios %}
-                <tr>
-                    <td>{{ item.title }}</td>
-                    <td>{{ item.email }}</td>
-                    <td>{{ item.phone }}</td>
-                    <td>
-                        <a href="{% url 'portfolio_page' id=item.pk %}" class="view-link">View Page</a>
-                    </td>
-                </tr>
-                {% endfor %}
+            {% for item in portfolios %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phone }}</td>
+                <td>
+                    <a href="{% url 'portfolio_page' id=item.pk %}" class="view-link">View Page</a>
+                </td>
+                <td>
+                    <form action="{% url 'delete_portfolio' item.pk %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Are you sure you want to delete this project?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
             </tbody>
         </table>
     </div>
@@ -126,23 +133,29 @@
     <div class="table_div">
         <table>
             <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Email</th>
-                    <th>Head Color</th>
-                    <th>Link</th>
-                </tr>
+            <tr>
+                <th>Title</th>
+                <th>Email</th>
+                <th>Head Color</th>
+                <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
-                {% for item in newsletters %}
-                <tr>
-                    <td>{{ item.title }}</td>
-                    <td>{{ item.email }}</td>
-                    <td>{{ item.head_color }}</td>
-
-                </tr>
-                {% endfor %}
+            {% for item in newsletters %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.head_color }}</td>
+                <td>
+                    <form action="{% url 'delete_newsletter' item.pk %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this newsletter?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
             </tbody>
+
         </table>
     </div>
     {% endif %}
@@ -152,25 +165,31 @@
     <div class="table_div">
         <table>
             <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Full Name</th>
-                    <th>Email</th>
-                    <th>Phone</th>
-                    <th>Link</th>
-                </tr>
+            <tr>
+                <th>Title</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
             </thead>
             <tbody>
-                {% for item in cards %}
-                <tr>
-                    <td>{{ item.title }}</td>
-                    <td>{{ item.first_name }} {{ item.last_name }}</td>
-                    <td>{{ item.email }}</td>
-                    <td>{{ item.phone }}</td>
-
-                </tr>
-                {% endfor %}
+            {% for item in cards %}
+            <tr>
+                <td>{{ item.title }}</td>
+                <td>{{ item.first_name }} {{ item.last_name }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phone }}</td>
+                <td>
+                    <form action="{% url 'delete_card' item.pk %}" method="POST" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this business card?')">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            {% endfor %}
             </tbody>
+
         </table>
     </div>
     {% endif %}
