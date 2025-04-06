@@ -22,7 +22,8 @@
 <body>
   <div class="form-container">
     <h2 class="mb-4">Create Newsletter</h2>
-    <form action="/create-newsletter" method="POST" enctype="multipart/form-data">
+    <form action="/newsletter-creator/" method="POST" enctype="multipart/form-data">
+      {% csrf_token %}
       <div class="form-group mb-3">
         <label for="title">Title</label>
         <input type="text" class="form-control" id="title" name="title" required>
@@ -39,8 +40,8 @@
       </div>
 
       <div class="form-group mb-3">
-        <label for="content">Main Content</label>
-        <textarea class="form-control" id="content" name="content" rows="5"></textarea>
+        <label for="project_text">Main Content</label>
+        <textarea class="form-control" id="project_text" name="project_text" rows="5"></textarea>
       </div>
 
       <div class="form-group mb-3">

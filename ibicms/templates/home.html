@@ -137,6 +137,7 @@
                 <th>Title</th>
                 <th>Email</th>
                 <th>Head Color</th>
+                <th>Link</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -147,6 +148,9 @@
                 <td>{{ item.email }}</td>
                 <td>{{ item.head_color }}</td>
                 <td>
+                    <a href="{% url 'newsletter_page' id=item.pk %}" class="view-link">View Page</a>
+                </td>
+                <td>
                     <form action="{% url 'delete_newsletter' item.pk %}" method="POST" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this newsletter?')">Delete</button>
@@ -155,7 +159,6 @@
             </tr>
             {% endfor %}
             </tbody>
-
         </table>
     </div>
     {% endif %}
@@ -170,6 +173,7 @@
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Link</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -181,6 +185,9 @@
                 <td>{{ item.email }}</td>
                 <td>{{ item.phone }}</td>
                 <td>
+                    <a href="{% url 'card_page' id=item.pk %}" class="view-link">View Page</a>
+                </td>
+                <td>
                     <form action="{% url 'delete_card' item.pk %}" method="POST" style="display:inline;">
                         {% csrf_token %}
                         <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Delete this business card?')">Delete</button>
@@ -189,10 +196,10 @@
             </tr>
             {% endfor %}
             </tbody>
-
         </table>
     </div>
     {% endif %}
+
 
     <div class="Add_new">
         <a href="{% url 'choose_cms_template' %}" class="edit-link">Add Project</a>

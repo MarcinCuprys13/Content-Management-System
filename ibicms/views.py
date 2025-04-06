@@ -7,7 +7,7 @@ from django.shortcuts import render
 def home(request):
     return render(request, 'home.html', {
         'portfolios': ProfilePortfolio.objects.filter(user=request.user),
-        # 'newsletters': ProfileNewsletter.objects.filter(user=request.user),
+        'newsletters': ProfileNewsletter.objects.filter(user=request.user),
         'cards': ProfileCard.objects.filter(user=request.user),
     })
 
@@ -51,8 +51,8 @@ def business_creator(request):
     if request.method == 'POST':
         ProfileCard.objects.create(
             user=request.user,
-            first_name=request.POST.get('first_name'),
-            last_name=request.POST.get('last_name'),
+#             first_name=request.POST.get('first_name'),
+#             last_name=request.POST.get('last_name'),
             title=request.POST.get('title'),
             phone=request.POST.get('phone'),
             email=request.POST.get('email'),
@@ -71,41 +71,48 @@ def business_creator(request):
 
 @login_required(login_url='/accounts/login/')
 def newsletter_creator(request):
-    # if request.method == 'POST':
-    #     title = request.POST.get('title')
-    #     hero_title = request.POST.get('hero_title')
-    #     hero_text = request.POST.get('hero_text')
-    #     # first_name = request.POST.get('first_name')
-    #     # last_name = request.POST.get('last_name')
-    #     phone = request.POST.get('phone')
-    #     email = request.POST.get('email')
-    #     project_text = request.POST.get('project_text')
-    #     user_photo = request.FILES.get('user_photo')
-    #     website_photo = request.FILES.get('website_photo')
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        subtitle = request.POST.get('subtitle')
+        email = request.POST.get('email')
+        project_text = request.POST.get('project_text')
+        image = request.FILES.get('image')
+        head_color = request.POST.get('head_color')
+        body_color = request.POST.get('body_color')
+        footer_color = request.POST.get('footer_color')
 
-    #     ProfilePortfolio.objects.create(
-    #         user=request.user,
-    #         title=title,
-    #         hero_title=hero_title,
-    #         hero_text=hero_text,
-    #         # first_name=first_name,
-    #         # last_name=last_name,
-    #         phone=phone,
-    #         email=email,
-    #         project_text=project_text,
-    #         user_photo=user_photo,
-    #         website_photo=website_photo
-    #     )
-    #     return redirect('home')
+        ProfileNewsletter.objects.create(
+            user=request.user,
+            title=title,
+            subtitle=subtitle,
+            email=email,
+            project_text=project_text,
+            image=image,
+            head_color=head_color,
+            body_color=body_color,
+            footer_color=footer_color
+        )
 
-    # return render(request, 'creators/portfolio_creator.html')
+        return redirect('home')
+
+    return render(request, 'creators/newsletter_creator.html')
     pass
 
+@login_required(login_url="/accounts/login/")
 def portfolio_preview(request, id):
     profile = get_object_or_404(ProfilePortfolio, pk=id)
     return render(request, 'portfolio_template.html', {
         'ProfilePortfolio': profile
     })
+@login_required(login_url="/accounts/login/")
+def newsletter_preview(request, id):
+    item = get_object_or_404(ProfileNewsletter, id=id, user=request.user)
+    return render(request, 'newsletter_template.html', {'item': item})
+
+@login_required(login_url="/accounts/login/")
+def card_preview(request, id):
+    item = get_object_or_404(ProfileCard, id=id, user=request.user)
+    return render(request, "card_template.html", {"item": item})
 
 def delete_portfolio(request, id):
     if request.method == "POST":
