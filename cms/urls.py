@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.urls import path
 from django.contrib import admin
 from django.urls import path
-from ibicms.views import business_creator, choose_cms_template, home, newsletter_creator, portfolio_creator
+from ibicms.views import business_creator, choose_cms_template, home, newsletter_creator, portfolio_creator, portfolio_preview
 from django.urls import path, include
 
 urlpatterns = [
@@ -16,6 +16,8 @@ urlpatterns = [
     path('portfolio-creator/', portfolio_creator, name='portfolio_creator'),
     path('newsletter-creator/', newsletter_creator, name='newsletter_creator'),
     path('business-creator/', business_creator, name='business_creator'),
+
+    path('portfolio/<int:id>/', portfolio_preview, name='portfolio_page'),
 
 
     

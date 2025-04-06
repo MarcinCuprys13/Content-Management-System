@@ -111,7 +111,9 @@
                     <td>{{ item.title }}</td>
                     <td>{{ item.email }}</td>
                     <td>{{ item.phone }}</td>
-
+                    <td>
+                        <a href="{% url 'portfolio_page' id=item.pk %}" class="view-link">View Page</a>
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

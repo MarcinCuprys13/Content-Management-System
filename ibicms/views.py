@@ -1,4 +1,4 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .models import ProfilePortfolio, ProfileCard
 from django.shortcuts import render
@@ -49,6 +49,13 @@ def portfolio_creator(request):
         return redirect('home')
 
     return render(request, 'creators/portfolio_creator.html')
+
+
+def portfolio_preview(request, id):
+    profile = get_object_or_404(ProfilePortfolio, pk=id)
+    return render(request, 'portfolio_template.html', {
+        'ProfilePortfolio': profile
+    })
 
 @login_required(login_url='/accounts/login/')
 def business_creator(request):
