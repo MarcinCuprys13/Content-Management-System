@@ -2,6 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
 from .models import ProfilePortfolio, ProfileCard
 from django.shortcuts import render
+from .forms import ProfileNewsletterForm
 
 @login_required(login_url='/accounts/login/') 
 def home(request):
@@ -47,3 +48,16 @@ def home(request):
 #         return redirect('home')
 #     else:
 #         return render(request, 'page_creator.html')
+
+@login_required
+def create_newsletter(request):
+    if request.method == 'POST':
+        form = ProfileNewsletterForm(request.POST, request.FILES)
+        if form.is_valid():
+            newsletter = form.save(commit=False)
+            newsletter.user = request.user
+            newsletter.save()
+            return redirect('newsletter_success')
+    else:
+        form = ProfileNewsletterForm()
+    return render(request, 'creators/create_newsletter.html', {'form': form})

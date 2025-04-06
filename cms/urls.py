@@ -20,9 +20,14 @@ from django.contrib import admin
 from django.urls import path
 from ibicms.views import home
 from django.urls import path, include
+from ibicms import views
+from ibicms.views import create_newsletter
+
+
 
 urlpatterns = [
     path("", home, name="home"), 
     path('admin/', admin.site.urls),
     path("accounts/", include("django.contrib.auth.urls")),
+    path('newsletter/create/', views.create_newsletter, name='create_newsletter'),
 ]
