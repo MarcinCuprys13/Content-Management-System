@@ -8,10 +8,20 @@
 </head>
 <body class="d-flex justify-content-center align-items-center vh-100 bg-light">
 
-    <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
-        <h2 class="text-center mb-3">Newsletter</h2>
-        <p class="text-center text-muted">Zapisz się, aby otrzymywać najnowsze wiadomości!</p>
-        <form method="post">
+    <div class="card shadow p-4" style="width: auto; display: inline-block;">
+        <h2 class="text-center mb-3">{{ ProfileNewsletter.title }}</h2>
+        
+        <div class="text-center mb-3">
+            {% if ProfileNewsletter.website_photo %}
+                <img src="{{ ProfileNewsletter.website_photo.url }}" alt="Newsletter image" class="img-fluid rounded-circle shadow-lg" style="max-width: 300px;">
+            {% else %}
+                <img src="https://via.placeholder.com/300" alt="Newsletter image" class="img-fluid rounded-circle shadow-lg" style="max-width: 300px;">
+            {% endif %}
+        </div>
+
+        <p class="text-center text-muted">{{ ProfileNewsletter.newsletter_text }}</p>
+        
+        <form method="post" enctype="multipart/form-data">
             {% csrf_token %}
             <div class="mb-3">
                 <label for="email" class="form-label">Twój email</label>

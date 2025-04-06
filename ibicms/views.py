@@ -1,16 +1,15 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import get_object_or_404, redirect, render
 from django.contrib.auth.decorators import login_required
 from .models import ProfilePortfolio, ProfileCard
 from django.shortcuts import render
 
 @login_required(login_url='/accounts/login/')
 def home(request):
-    user_portfolios = list(ProfilePortfolio.objects.filter(user=request.user))
-    user_card = list(ProfileCard.objects.filter(user=request.user))
-    print("uytwkonik zalogowany")
-    print(user_portfolios)
-    print(user_card)
-    return render(request, 'home.html', {'user_profiles': user_portfolios + user_card})
+    return render(request, 'home.html', {
+        'portfolios': ProfilePortfolio.objects.filter(user=request.user),
+        # 'newsletters': ProfileNewsletter.objects.filter(user=request.user),
+        'cards': ProfileCard.objects.filter(user=request.user),
+    })
 
 @login_required(login_url='/accounts/login/')
 def choose_cms_template(request):
@@ -50,6 +49,13 @@ def portfolio_creator(request):
         return redirect('home')
 
     return render(request, 'creators/portfolio_creator.html')
+
+
+def portfolio_preview(request, id):
+    profile = get_object_or_404(ProfilePortfolio, pk=id)
+    return render(request, 'portfolio_template.html', {
+        'ProfilePortfolio': profile
+    })
 
 @login_required(login_url='/accounts/login/')
 def business_creator(request):
