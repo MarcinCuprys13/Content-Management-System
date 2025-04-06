@@ -173,6 +173,7 @@
                 <th>Full Name</th>
                 <th>Email</th>
                 <th>Phone</th>
+                <th>Link</th>
                 <th>Actions</th>
             </tr>
             </thead>
@@ -183,6 +184,9 @@
                 <td>{{ item.first_name }} {{ item.last_name }}</td>
                 <td>{{ item.email }}</td>
                 <td>{{ item.phone }}</td>
+                <td>
+                    <a href="{% url 'card_page' id=item.pk %}" class="view-link">View Page</a>
+                </td>
                 <td>
                     <form action="{% url 'delete_card' item.pk %}" method="POST" style="display:inline;">
                         {% csrf_token %}
@@ -195,6 +199,7 @@
         </table>
     </div>
     {% endif %}
+
 
     <div class="Add_new">
         <a href="{% url 'choose_cms_template' %}" class="edit-link">Add Project</a>

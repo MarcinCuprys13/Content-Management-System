@@ -51,8 +51,8 @@ def business_creator(request):
     if request.method == 'POST':
         ProfileCard.objects.create(
             user=request.user,
-            first_name=request.POST.get('first_name'),
-            last_name=request.POST.get('last_name'),
+#             first_name=request.POST.get('first_name'),
+#             last_name=request.POST.get('last_name'),
             title=request.POST.get('title'),
             phone=request.POST.get('phone'),
             email=request.POST.get('email'),
@@ -98,16 +98,21 @@ def newsletter_creator(request):
     return render(request, 'creators/newsletter_creator.html')
     pass
 
+@login_required(login_url="/accounts/login/")
 def portfolio_preview(request, id):
     profile = get_object_or_404(ProfilePortfolio, pk=id)
     return render(request, 'portfolio_template.html', {
         'ProfilePortfolio': profile
     })
-
+@login_required(login_url="/accounts/login/")
 def newsletter_preview(request, id):
     item = get_object_or_404(ProfileNewsletter, id=id, user=request.user)
     return render(request, 'newsletter_template.html', {'item': item})
 
+@login_required(login_url="/accounts/login/")
+def card_preview(request, id):
+    item = get_object_or_404(ProfileCard, id=id, user=request.user)
+    return render(request, "card_template.html", {"item": item})
 
 def delete_portfolio(request, id):
     if request.method == "POST":
