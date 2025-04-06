@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import redirect, render
 from django.contrib.auth.decorators import login_required
 from .models import ProfilePortfolio, ProfileCard
 from django.shortcuts import render
@@ -22,7 +22,34 @@ def newsletter_creator(request):
 
 @login_required(login_url='/accounts/login/')
 def portfolio_creator(request):
-    return render(request, 'choose_template.html')
+    if request.method == 'POST':
+        title = request.POST.get('title')
+        hero_title = request.POST.get('hero_title')
+        hero_text = request.POST.get('hero_text')
+        # first_name = request.POST.get('first_name')
+        # last_name = request.POST.get('last_name')
+        phone = request.POST.get('phone')
+        email = request.POST.get('email')
+        project_text = request.POST.get('project_text')
+        user_photo = request.FILES.get('user_photo')
+        website_photo = request.FILES.get('website_photo')
+
+        ProfilePortfolio.objects.create(
+            user=request.user,
+            title=title,
+            hero_title=hero_title,
+            hero_text=hero_text,
+            # first_name=first_name,
+            # last_name=last_name,
+            phone=phone,
+            email=email,
+            project_text=project_text,
+            user_photo=user_photo,
+            website_photo=website_photo
+        )
+        return redirect('home')
+
+    return render(request, 'creators/portfolio_creator.html')
 
 @login_required(login_url='/accounts/login/')
 def business_creator(request):
