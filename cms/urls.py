@@ -4,7 +4,7 @@ from django.conf.urls.static import static
 from django.urls import path
 from django.contrib import admin
 from django.urls import path
-from ibicms.views import business_creator, choose_cms_template, home, newsletter_creator, portfolio_creator, portfolio_preview, delete_portfolio, delete_card, delete_newsletter, newsletter_preview, card_preview
+from ibicms.views import business_creator, choose_cms_template, edit_card, edit_newsletter, edit_portfolio, home, newsletter_creator, portfolio_creator, portfolio_preview, delete_portfolio, delete_card, delete_newsletter, newsletter_preview, card_preview
 from django.urls import path, include
 
 urlpatterns = [
@@ -27,6 +27,12 @@ urlpatterns = [
     path('portfolio/<int:id>/delete/', delete_portfolio, name='delete_portfolio'),
     path('newsletter/<int:id>/delete/', delete_newsletter, name='delete_newsletter'),
     path('card/<int:id>/delete/', delete_card, name='delete_card'),
+
+    #edit
+    path('portfolio/edit/<int:id>/', edit_portfolio, name='edit_portfolio'),
+    path('card/edit/<int:id>/', edit_card, name='edit_card'),
+    path('newsletter/edit/<int:id>/', edit_newsletter, name='edit_newsletter'),
+
     
 ]
 

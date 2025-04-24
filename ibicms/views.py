@@ -15,6 +15,7 @@ def home(request):
 def choose_cms_template(request):
     return render(request, 'choose_template.html')
 
+#CREATORS
 @login_required(login_url='/accounts/login/')
 def portfolio_creator(request):
     if request.method == 'POST':
@@ -73,47 +74,121 @@ def business_creator(request):
 def newsletter_creator(request):
     if request.method == 'POST':
         title = request.POST.get('title')
-        subtitle = request.POST.get('subtitle')
+        content = request.POST.get('content')
         email = request.POST.get('email')
         project_text = request.POST.get('project_text')
         image = request.FILES.get('image')
-        head_color = request.POST.get('head_color')
-        body_color = request.POST.get('body_color')
         footer_color = request.POST.get('footer_color')
 
         ProfileNewsletter.objects.create(
             user=request.user,
             title=title,
-            subtitle=subtitle,
+            content=content,
             email=email,
-            project_text=project_text,
             image=image,
-            head_color=head_color,
-            body_color=body_color,
             footer_color=footer_color
         )
 
         return redirect('home')
 
     return render(request, 'creators/newsletter_creator.html')
-    pass
 
+#EDITORS
+@login_required(login_url='/accounts/login/')
+def edit_newsletter(request, id):
+    newsletter = get_object_or_404(ProfileNewsletter, id=id, user=request.user)
+
+    if request.method == 'POST':
+        newsletter.title = request.POST.get('title')
+        newsletter.content = request.POST.get('content')
+        newsletter.email = request.POST.get('email')
+        # newsletter.project_text = request.POST.get('project_text')
+        # newsletter.head_color = request.POST.get('head_color')
+        # newsletter.body_color = request.POST.get('body_color')
+        newsletter.footer_color = request.POST.get('footer_color')
+
+        if 'image' in request.FILES:
+            newsletter.image = request.FILES.get('image')
+
+        newsletter.save()
+        return redirect('home')
+
+    return render(request, 'editors/newsletter_editor.html', {
+        'newsletter': newsletter
+    })
+
+@login_required(login_url='/accounts/login/')
+def edit_portfolio(request, id):
+    portfolio = get_object_or_404(ProfilePortfolio, id=id, user=request.user)
+
+    if request.method == 'POST':
+        portfolio.title = request.POST.get('title')
+        portfolio.hero_title = request.POST.get('hero_title')
+        portfolio.hero_text = request.POST.get('hero_text')
+        portfolio.phone = request.POST.get('phone')
+        portfolio.email = request.POST.get('email')
+        portfolio.project_text = request.POST.get('project_text')
+
+        if 'user_photo' in request.FILES:
+            portfolio.user_photo = request.FILES.get('user_photo')
+        if 'website_photo' in request.FILES:
+            portfolio.website_photo = request.FILES.get('website_photo')
+
+        portfolio.save()
+        return redirect('home')
+
+    return render(request, 'editors/portfolio_editor.html', {
+        'portfolio': portfolio
+    })
+
+@login_required(login_url='/accounts/login/')
+def edit_card(request, id):
+    card = get_object_or_404(ProfileCard, id=id, user=request.user)
+
+    if request.method == 'POST':
+        card.first_name = request.POST.get('first_name')
+        card.last_name = request.POST.get('last_name')
+        card.title = request.POST.get('title')
+        card.phone = request.POST.get('phone')
+        card.email = request.POST.get('email')
+        card.country = request.POST.get('country')
+        card.person_text = request.POST.get('person_text')
+        card.linkedin_url = request.POST.get('linkedin_url')
+        card.github_url = request.POST.get('github_url')
+        card.mypage_url = request.POST.get('mypage_url')
+        card.body_color = request.POST.get('body_color')
+        card.footer_color = request.POST.get('footer_color')
+
+        if 'user_photo' in request.FILES:
+            card.user_photo = request.FILES.get('user_photo')
+
+        card.save()
+        return redirect('home')
+
+    return render(request, 'editors/card_editor.html', {
+        'card': card
+    })
+
+
+#PREVIEWS
 @login_required(login_url="/accounts/login/")
 def portfolio_preview(request, id):
     profile = get_object_or_404(ProfilePortfolio, pk=id)
     return render(request, 'portfolio_template.html', {
         'ProfilePortfolio': profile
     })
+
 @login_required(login_url="/accounts/login/")
 def newsletter_preview(request, id):
     item = get_object_or_404(ProfileNewsletter, id=id, user=request.user)
-    return render(request, 'newsletter_template.html', {'item': item})
+    return render(request, 'newsletter_template.html', {'ProfileNewsletter': item})
 
 @login_required(login_url="/accounts/login/")
 def card_preview(request, id):
     item = get_object_or_404(ProfileCard, id=id, user=request.user)
     return render(request, "card_template.html", {"item": item})
 
+#DELETES
 def delete_portfolio(request, id):
     if request.method == "POST":
         item = get_object_or_404(ProfilePortfolio, id=id, user=request.user)
@@ -131,41 +206,3 @@ def delete_card(request, id):
         item = get_object_or_404(ProfileCard, id=id, user=request.user)
         item.delete()
     return redirect('home')
-
-
-
-# @login_required(login_url='/accounts/login/') 
-# def page_creator(request):
-#     if request.method == 'POST':
-#         title = request.POST.get('title')
-#         first_name = request.POST.get('firstName')
-#         last_name = request.POST.get('lastName')
-#         person_text = request.POST.get("personText")
-#         head_color = request.POST.get('headColor')
-#         project_text = request.POST.get("projectText")
-#         body_color = request.POST.get('bodyColor')
-#         footer_color = request.POST.get('footerColor')
-#         phone = request.POST.get('phone')
-#         email = request.POST.get('email')
-#         user_photo = request.FILES.get('user_photo')
-#         website_photo = request.FILES.get('website_photo')
-
-#         profile = Profile(
-#             title=title,
-#             first_name=first_name,
-#             last_name=last_name,
-#             person_text=person_text,
-#             head_color=head_color,
-#             project_text=project_text,
-#             body_color=body_color,
-#             footer_color=footer_color,
-#             phone=phone,
-#             email=email,
-#             user_photo=user_photo,
-#             website_photo=website_photo,
-#             user=request.user  
-#         )
-#         profile.save()
-#         return redirect('home')
-#     else:
-#         return render(request, 'page_creator.html')

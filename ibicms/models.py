@@ -17,12 +17,12 @@ class ProfilePortfolio(models.Model):
 
 class ProfileNewsletter(models.Model):
     title = models.CharField(max_length=255)
-    subtitle = models.CharField(max_length=255, blank=True)
+    content = models.TextField(blank=True)
     email = models.EmailField()
-    project_text = models.TextField(blank=True)
+    # project_text = models.TextField(blank=True)
     image = models.ImageField(upload_to='newsletter_images/', blank=True, null=True)
     head_color = models.CharField(max_length=7, default='#000000')
-    body_color = models.CharField(max_length=7, default='#ffffff')
+    # body_color = models.CharField(max_length=7, default='#ffffff')
     footer_color = models.CharField(max_length=7, default='#343a40')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
 
