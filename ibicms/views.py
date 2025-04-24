@@ -22,8 +22,6 @@ def portfolio_creator(request):
         title = request.POST.get('title')
         hero_title = request.POST.get('hero_title')
         hero_text = request.POST.get('hero_text')
-        # first_name = request.POST.get('first_name')
-        # last_name = request.POST.get('last_name')
         phone = request.POST.get('phone')
         email = request.POST.get('email')
         project_text = request.POST.get('project_text')
@@ -35,8 +33,6 @@ def portfolio_creator(request):
             title=title,
             hero_title=hero_title,
             hero_text=hero_text,
-            # first_name=first_name,
-            # last_name=last_name,
             phone=phone,
             email=email,
             project_text=project_text,
@@ -102,9 +98,6 @@ def edit_newsletter(request, id):
         newsletter.title = request.POST.get('title')
         newsletter.content = request.POST.get('content')
         newsletter.email = request.POST.get('email')
-        # newsletter.project_text = request.POST.get('project_text')
-        # newsletter.head_color = request.POST.get('head_color')
-        # newsletter.body_color = request.POST.get('body_color')
         newsletter.footer_color = request.POST.get('footer_color')
 
         if 'image' in request.FILES:
